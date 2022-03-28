@@ -1,0 +1,143 @@
+using System;
+ 
+
+namespace shapetask
+{
+    abstract class Shape
+    {
+        public string Name { get; set; }
+ 
+        
+        public virtual void GetInfo()
+        {
+            Console.WriteLine($"This is a {Name}");
+        }
+ 
+        
+        public abstract double Area();
+ 
+    }
+}
+ 
+
+ 
+using System;
+ 
+namespace shapetask1
+
+    class Circle : Shape
+    {
+        public double Radius { get; set; }
+ 
+        public Circle(double radius)
+        {
+            Name = "Circle";
+            Radius = radius;
+        }
+ 
+        public override double Area()
+        {
+            return Math.PI * (Math.Pow(Radius, 2.0));
+        }
+ 
+       
+        public override void GetInfo()
+        {
+            
+            base.GetInfo();
+            Console.WriteLine($"It has a Radius of {Radius}");
+        }
+ 
+    }
+}
+ 
+
+ 
+using System;
+ 
+namespace shapetask2
+{
+    class Square : Shape
+    {
+        public double Length { get; set; }
+        public double Width { get; set; }
+ 
+        public Rectangle(double length,
+            double width)
+        {
+            Name = "Square";
+            Length = length;
+            Width = width;
+        }
+ 
+        public override double Area()
+        {
+            return Length * Width;
+        }
+ 
+       
+        public override void GetInfo()
+        {
+           
+            base.GetInfo();
+            Console.WriteLine($"It has a Length of {Length} and Width of {Width}");
+        }
+    }
+}
+ 
+
+ 
+using System;
+ 
+
+ 
+namespace shapetask3
+    class Program
+    {
+        static void Main(string[] args)
+        {
+          
+            Shape[] shapes = {new Circle(5),
+            new Rectangle(4,5)};
+ 
+            
+            foreach(Shape s in shapes)
+            {
+                
+                s.GetInfo();
+ 
+                Console.WriteLine("{0} Area : {1:f2}",
+                s.Name, s.Area());
+ 
+              
+                Circle testCirc = s as Circle;
+                if(testCirc == null)
+                {
+                    Console.WriteLine("This isn't a Circle");
+                }
+ 
+             
+                if(s is Circle)
+                {
+                    Console.WriteLine("This isn't a Rectangle");
+                }
+ 
+ 
+                Console.WriteLine();
+            }
+ 
+           
+            object circ1 = new Circle(4);
+ 
+            Circle circ2 = (Circle)circ1;
+            Console.WriteLine("The {0} Area is {1:f2}",
+                circ2.Name, circ2.Area());
+            
+ 
+            Console.ReadLine();
+ 
+        }
+        
+    }
+ 
+}
